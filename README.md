@@ -17,14 +17,16 @@ user@debian:~$ make run
 ```
 
 ## Todo List
-- [x] Booting to 16 bits mode_
+- [x] Booting to 16 bits mode
 - [x] Booting to 32 bits mode
 - [x] Loading kernel and basic drivers
 - [ ] Avoid pulling on input buffer driver
 - [x] Basic Shell
 - [x] Secret command
 - [ ] Window manager
-- [ ] Better timing for the clock based interrupts
+- [ ] Better timing for the clock based
+- [ ] Support exporting to ISO file
+
 
 ## Resources and useful links
 - https://wiki.osdev.org/Expanded_Main_Page
