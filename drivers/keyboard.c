@@ -10,14 +10,41 @@ __volatile__ char inputBuffer[MAX_INPUT_BUFFER];
 //The index of the next index to insert a key 
 __volatile__ char inputBufferIndex = 0;
 
+//Current keyboard state 
+/***
+* Bit 2 : Is cap locked
+***/
+__volatile__ u8 keyBoardState = 0x00;
+
+char *currentKeyboard = sc_ascii_lower;
+
 static void keyboard_callback(registers_t regs) {
 
     //Read the scan code
     u8 scancode = read_port_byte(0x60);
 
     //Add the key to the buffer if not an up event
-    if(scancode < 0x80)
+    if(scancode > 0x80)
+       return;
+
+    //If Caps lock
+    if(scancode == 0x3A){
+        
+        //Flip the keyboard state
+        keyBoardState ^= 0x04;
+
+        //Set keyboard state
+        write_port_byte(0x60,keyBoardState);
+        write_port_byte(0x64,0xED);
+
+        //Set keymap
+        currentKeyboard = (keyBoardState & 0x04) ? sc_ascii : sc_ascii_lower;
+        
+
+    }else{
         addKeyToBuffer(scancode);
+    }
+    
 
 }
 
@@ -32,7 +59,7 @@ void addKeyToBuffer(u8 scancode){
         return;
 
     //Add it to the buffer
-    inputBuffer[inputBufferIndex] = sc_ascii[(int)scancode];
+    inputBuffer[inputBufferIndex] = currentKeyboard[(int)scancode];
     inputBufferIndex++;
 
 }

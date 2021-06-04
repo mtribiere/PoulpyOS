@@ -5,7 +5,7 @@
 #include "../cpu/types.h"
 #include "../libc/string.h"
 
-void printCLI(const char *cmd,int size){
+void printCLI(const char *cmd){
 
     //Clear the current line
     clearLastLine();
@@ -14,10 +14,7 @@ void printCLI(const char *cmd,int size){
     changeCurrentColor(MAGENTA);
     pprint("\r$>");
     changeCurrentColor(WHITE);
-
-    for(int i = 0;i<size;i++)
-        pprintChar(cmd[i]);
-    
+    pprint(cmd);
 }
 
 void computeChar(char *cmd, char *nextCharIndex, char toInsert, u8 *runCommandFlag){
@@ -28,6 +25,9 @@ void computeChar(char *cmd, char *nextCharIndex, char toInsert, u8 *runCommandFl
 
     //If this is a backapce
     if(toInsert == '\b'){
+
+        //If the cmd is already empty
+        if(*nextCharIndex <= 0) return;
 
         //Remove the last char
         (*nextCharIndex)--;
@@ -43,7 +43,7 @@ void computeChar(char *cmd, char *nextCharIndex, char toInsert, u8 *runCommandFl
     }
 
     //Print the new line
-    printCLI(cmd,*nextCharIndex);
+    printCLI(cmd);
 }
 
 void printTree(){
@@ -110,21 +110,21 @@ void runCommand(char *cmd){
     if(!cmd[0])
         return;
 
-    if(strcmp(cmd,"HELLO"))
+    if(strcmp(cmd,"hello"))
         
         pprint("Welcome to Poulpy-OS !!\r\n");
 
-    else if(strcmp(cmd,"TREE")){
+    else if(strcmp(cmd,"tree")){
 
         printTree();
 
-    }else if(strcmp(cmd,"JOHNNY")){
+    }else if(strcmp(cmd,"Johnny")){
 
         printLyricText(lyrics);
 
-    }else if(strcmp(cmd,"HELP")){
+    }else if(strcmp(cmd,"help")){
 
-        pprint("Supported command : \r\n - TREE \r\n - HELLO \r\n - JOHNNY \r\n - HELP \r\n");
+        pprint("Supported command : \r\n - tree \r\n - hello \r\n - Johnny \r\n - help \r\n");
 
     }else{
         pprint("No such command\r\n");
@@ -140,13 +140,12 @@ void bash(){
         char nextCharIndex = 0;
         char cmd[MAX_COMMAND_SIZE];
         memset(cmd,0,MAX_COMMAND_SIZE);
-        cmd[0] = 0; //QUICK FIX : Terrible, should be removed later
         
         char c = 0;
         u8 runCommandFlag = 0;
 
         //Print the shell
-        printCLI(cmd,nextCharIndex);
+        printCLI(cmd);
         
         while(!runCommandFlag){
 
@@ -155,7 +154,6 @@ void bash(){
 
             //Compute the next char
             computeChar(cmd, &nextCharIndex,c,&runCommandFlag);
-
         }
 
         runCommand(cmd);

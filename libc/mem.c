@@ -6,9 +6,11 @@ void memcpy(char *dst, char *src,int n){
     }
 }
 
-void *memset(void *str, u32 c, u32 n){
-    for(u32 i = 0;i<n;i++)
-        *(u32*)(str+sizeof(u32)) = c;  
-
-    return str;
+void *memset(void *s, int c, unsigned int len){
+    unsigned char* p=s;
+    while(len--)
+    {
+        *p++ = (unsigned char)c;
+    }
+    return s;
 }

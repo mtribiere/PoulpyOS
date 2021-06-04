@@ -4,6 +4,6 @@
 #include "../cpu/types.h"
 
 void memcpy(char *dst, char *src,int n);
-void *memset(void *str, u32 c, u32 n);
+void *memset(void *s, int c, unsigned int len);
 
 #endif
