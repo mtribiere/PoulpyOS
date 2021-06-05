@@ -3,13 +3,8 @@
 
 ## Description
 A toy OS for learning <br>
-<img align="middle" src="pic/pic1.png" width="400">
+<img align="middle" src="pic/pic1.png" width="450"> <img align="middle" src="pic/pic2.png" width="450">
 
-  
-## Compiling for dev
-```console
-user@debian:~$ make debug
-```
 
 ## Testing only
 ```console
@@ -17,6 +12,12 @@ user@debian:~$ sudo apt update
 user@debian:~$ sudo apt install qemu qemu-system-x86
 user@debian:~$ make run
 ```
+  
+## Compiling for dev
+```console
+user@debian:~$ make debug
+```
+
 
 ## Todo List
 - [x] Booting to 16 bits mode
