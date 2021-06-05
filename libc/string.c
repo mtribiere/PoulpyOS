@@ -11,3 +11,11 @@ int strcmp( const char * first, const char * second ){
     return (isValid && !(*first) && !(*second));
 
 }
+
+int strlen(const char *s){
+
+    int i = 0;
+    while(*(s+i)) i++;
+
+    return i;
+}

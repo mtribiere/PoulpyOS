@@ -17,7 +17,7 @@ void printCLI(const char *cmd){
     pprint(cmd);
 }
 
-void computeChar(char *cmd, char *nextCharIndex, char toInsert, u8 *runCommandFlag){
+void computeChar(char *cmd, char toInsert, u8 *runCommandFlag){
 
     //If this is an error
     if(toInsert == '\0' || toInsert == 0x01)
@@ -27,10 +27,10 @@ void computeChar(char *cmd, char *nextCharIndex, char toInsert, u8 *runCommandFl
     if(toInsert == '\b'){
 
         //If the cmd is already empty
-        if(*nextCharIndex <= 0) return;
+        if(strlen(cmd) <= 0) return;
 
         //Remove the last char
-        (*nextCharIndex)--;
+        *(cmd+strlen(cmd)-1) = '\0';
 
     }else if(toInsert == '\r'){ //If this is enter 
         
@@ -38,8 +38,7 @@ void computeChar(char *cmd, char *nextCharIndex, char toInsert, u8 *runCommandFl
         
     }else{//Add the char to the string
 
-        cmd[(*nextCharIndex)] = (u8) toInsert;
-        (*nextCharIndex)++;
+        cmd[strlen(cmd)] = (u8) toInsert;
     }
 
     //Print the new line
@@ -107,7 +106,7 @@ void runCommand(char *cmd){
 
     pprint("\r\n");
 
-    if(!cmd[0])
+    if(strlen(cmd) == 0)
         return;
 
     if(strcmp(cmd,"hello"))
@@ -137,7 +136,6 @@ void bash(){
     while (1)
     {   
         //Init
-        char nextCharIndex = 0;
         char cmd[MAX_COMMAND_SIZE];
         memset(cmd,0,MAX_COMMAND_SIZE);
         
@@ -153,7 +151,7 @@ void bash(){
             while(getKey(&c) == -1);
 
             //Compute the next char
-            computeChar(cmd, &nextCharIndex,c,&runCommandFlag);
+            computeChar(cmd,c,&runCommandFlag);
         }
 
         runCommand(cmd);
