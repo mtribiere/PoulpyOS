@@ -1,6 +1,8 @@
-# PoulpyOS [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-A toy OS for learning
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) <br>
+<img align="middle" src="pic/logo_large.png" width="800"> <br>
 
+## Description
+A toy OS for learning <br>
 <img align="middle" src="pic/pic1.png" width="400">
 
   
