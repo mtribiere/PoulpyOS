@@ -3,7 +3,7 @@
 
 ## Description
 A toy OS for learning <br>
-<img align="middle" src="pic/pic1.png" width="450"> <img align="middle" src="pic/pic2.png" width="450">
+<img align="middle" src="pic/pic1.png" width="400"> <img align="middle" src="pic/pic2.png" width="400">
 
 
 ## Testing only
