@@ -109,20 +109,16 @@ void runCommand(char *cmd){
     if(strlen(cmd) == 0)
         return;
 
-    if(strcmp(cmd,"hello"))
-        
+    if(strcmp(cmd,"hello"))    
         pprint("Welcome to Poulpy-OS !!\r\n");
 
     else if(strcmp(cmd,"tree")){
-
         printTree();
 
     }else if(strcmp(cmd,"Johnny")){
-
         printLyricText(lyrics);
 
     }else if(strcmp(cmd,"help")){
-
         pprint("Supported command : \r\n - tree \r\n - hello \r\n - Johnny \r\n - help \r\n");
 
     }else{

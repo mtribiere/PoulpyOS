@@ -13,6 +13,7 @@ jmp BOOT_SECTOR_ENTRY
 %include "boot/printFunction.asm"
 %include "boot/drive_loader.asm"
 
+SECTION .text
 [bits 16]
 BOOT_SECTOR_ENTRY:
 mov bp, 0x9000 ; Set the stack position

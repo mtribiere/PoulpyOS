@@ -5,7 +5,7 @@
 #include "../libc/mem.h"
 
 //The input buffer
-__volatile__ char inputBuffer[MAX_INPUT_BUFFER];
+__volatile__ unsigned char inputBuffer[MAX_INPUT_BUFFER];
 
 //The index of the next index to insert a key 
 __volatile__ char inputBufferIndex = 0;
@@ -16,7 +16,7 @@ __volatile__ char inputBufferIndex = 0;
 ***/
 __volatile__ u8 keyBoardState = 0x00;
 
-char *currentKeyboard = sc_ascii_lower;
+const char *currentKeyboard = sc_ascii_lower;
 
 static void keyboard_callback(registers_t regs) {
 
@@ -59,7 +59,7 @@ void addKeyToBuffer(u8 scancode){
         return;
 
     //Add it to the buffer
-    inputBuffer[inputBufferIndex] = currentKeyboard[(int)scancode];
+    inputBuffer[inputBufferIndex] = (unsigned char) currentKeyboard[(int)scancode];
     inputBufferIndex++;
 
 }

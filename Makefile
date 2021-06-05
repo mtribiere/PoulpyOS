@@ -11,32 +11,44 @@ OBJ = ${C_SOURCES:.c=.o cpu/interrupt.o}
 CC = /usr/local/i386elfgcc/bin/i386-elf-gcc
 LD = /usr/local/i386elfgcc/bin/i386-elf-ld
 GDB = /usr/local/i386elfgcc/bin/i386-elf-gdb
-CFLAGS = -g -std=c99 
+CFLAGS = -Wall -g -std=c99 
+
+#Set names
+IMG=poulpyOS.img
+ISO=poulpyOS.iso
+BIN=poulpyOS.bin
+
+all: poulpyOS
 
 #Build rules 
-poulpyOS.bin: boot/bootMain.bin kernel.bin
+poulpyOS: $(BIN)
+
+$(BIN): boot/bootMain.bin kernel.bin
 	cat $^ > $@
 
 kernel.bin: boot/kernel_entry.o ${OBJ}
 	${LD} -o $@ -Ttext 0x1000 $^ --oformat binary
 
-
-#Debug build rules
-debug: poulpyOS.bin kernel.elf
-	qemu-system-i386 -s -fda poulpyOS.bin &
-	${GDB} -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
-
 kernel.elf: boot/kernel_entry.o ${OBJ}
 	${LD} -o $@ -Ttext 0x1000 $^ 
 
-run: poulpyOS.bin
-	qemu-system-x86_64 -fda poulpyOS.bin
+run: $(BIN)
+	qemu-system-x86_64 -fda $(BIN)
 
-iso: poulpyOS.bin grub.cfg
-	@mkdir -p boot/grub
-	@cp poulpyOS.bin boot/
-	@cp grub.cfg boot/grub
-	@grub-mkrescue -o poulpyOS.iso ./
+img: $(IMG)
+
+$(IMG): boot/bootMain.bin kernel.bin
+	dd if=/dev/zero of=$(IMG) bs=512 count=2880
+	dd if=boot/bootMain.bin of=$(IMG) conv=notrunc bs=512 seek=0 count=1
+	dd if=kernel.bin of=$(IMG) conv=notrunc bs=512 seek=1 count=2048
+
+iso: $(IMG)
+	mkisofs -pad -b $(IMG) -R -o $(ISO) $(IMG)
+
+#Debug build rules
+debug: $(BIN) kernel.elf
+	qemu-system-i386 -s -fda $(BIN) &
+	${GDB} -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
 
 %.o: %.c ${HEADERS}
 	${CC} ${CFLAGS} -ffreestanding -c $< -o $@
@@ -48,5 +60,5 @@ iso: poulpyOS.bin grub.cfg
 	nasm $< -f bin -o $@
 
 clean:
-	rm -rf *.bin *.o poulpyOS.bin
+	rm -rf *.bin *.o *.bin *.img *.iso 
 	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o
