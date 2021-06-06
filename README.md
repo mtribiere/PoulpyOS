@@ -30,6 +30,7 @@ user@debian:~$ make debug
 - [ ] Window manager
 - [ ] Better timing for the clock based
 - [ ] Support exporting to ISO file
+- [ ] Make sure the PC doesn't blow up
 
 
 ## Resources and useful links
