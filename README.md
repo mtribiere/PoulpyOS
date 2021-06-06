@@ -6,7 +6,7 @@ A toy OS for learning <br>
 <img align="middle" src="pic/pic1.png" width="400"> <img align="middle" src="pic/pic2.png" width="400">
 
 
-## Testing only
+## Testing the OS
 ```console
 user@debian:~$ sudo apt update
 user@debian:~$ sudo apt install qemu qemu-system-x86
@@ -20,6 +20,7 @@ user@debian:~$ make debug
 
 
 ## Todo List
+- [X] Custom bootloader
 - [x] Booting to 16 bits mode
 - [x] Booting to 32 bits mode
 - [x] Loading kernel and basic drivers
