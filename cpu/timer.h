@@ -5,6 +5,6 @@
 
 #define HARDWARE_TIMER_FREQUENCY 1193180
 
-void init_timer(u32 freq);
+void init_timer(uint32_t freq);
 
 #endif

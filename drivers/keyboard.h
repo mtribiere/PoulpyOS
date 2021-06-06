@@ -18,10 +18,10 @@ const static char sc_ascii_lower[] = { '?', '?', '1', '2', '3', '4', '5', '6',
         'b', 'n', 'm', ',', '.', '/', '?', '?', '?', ' '};
 
 //Add a scan code to the internal keybuffer
-void addKeyToBuffer(u8 scancode);
+void addKeyToBuffer(uint8_t scancode);
 
 //Read the last unread key for buffer (Destructive)
 //Return 0 if the read was successful or -1
-s8 getKey(char *c);
+int8_t getKey(char *c);
 
 void init_keyboard();

@@ -14,14 +14,14 @@ __volatile__ char inputBufferIndex = 0;
 /***
 * Bit 2 : Is cap locked
 ***/
-__volatile__ u8 keyBoardState = 0x00;
+__volatile__ uint8_t keyBoardState = 0x00;
 
 const char *currentKeyboard = sc_ascii_lower;
 
 static void keyboard_callback(registers_t regs) {
 
     //Read the scan code
-    u8 scancode = read_port_byte(0x60);
+    uint8_t scancode = read_port_byte(0x60);
 
     //Add the key to the buffer if not an up event
     if(scancode > 0x80)
@@ -52,7 +52,7 @@ void init_keyboard() {
    register_interrupt_handler(IRQ1, keyboard_callback); 
 }
 
-void addKeyToBuffer(u8 scancode){
+void addKeyToBuffer(uint8_t scancode){
 
     //Check if enough space is available in the buffer
     if(inputBufferIndex>=MAX_INPUT_BUFFER)
@@ -64,7 +64,7 @@ void addKeyToBuffer(u8 scancode){
 
 }
 
-s8 getKey(char *c){
+int8_t getKey(char *c){
 
     //If no key if the buffer
     if(inputBufferIndex <= 0)

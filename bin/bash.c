@@ -17,7 +17,7 @@ void printCLI(const char *cmd){
     pprint(cmd);
 }
 
-void computeChar(char *cmd, char toInsert, u8 *runCommandFlag){
+void computeChar(char *cmd, char toInsert, uint8_t *runCommandFlag){
 
     //If this is an error
     if(toInsert == '\0' || toInsert == 0x01)
@@ -38,7 +38,7 @@ void computeChar(char *cmd, char toInsert, u8 *runCommandFlag){
         
     }else{//Add the char to the string
 
-        cmd[strlen(cmd)] = (u8) toInsert;
+        cmd[strlen(cmd)] = (uint8_t) toInsert;
     }
 
     //Print the new line
@@ -136,7 +136,7 @@ void bash(){
         memset(cmd,0,MAX_COMMAND_SIZE);
         
         char c = 0;
-        u8 runCommandFlag = 0;
+        uint8_t runCommandFlag = 0;
 
         //Print the shell
         printCLI(cmd);
