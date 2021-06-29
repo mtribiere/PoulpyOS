@@ -35,13 +35,15 @@ kernel.elf: boot/kernel_entry.o ${OBJ}
 run: $(BIN)
 	qemu-system-x86_64 -fda $(BIN)
 
-img: $(IMG)
+img:	
+	rm -rf boot/bootMain.bin
+	rm -rf poulpyOS.img
+	make $(IMG)
 
-$(IMG): boot/bootMain.bin kernel.bin
-	dd if=/dev/zero of=$(IMG) bs=512 count=2880
+$(IMG): boot/bootMain.bin
 	dd if=boot/bootMain.bin of=$(IMG) conv=notrunc bs=512 seek=0 count=1
-	dd if=kernel.bin of=$(IMG) conv=notrunc bs=512 seek=1 count=2048
-
+	dd if=kernel.bin of=$(IMG) conv=notrunc bs=512 seek=1
+	
 iso: $(IMG)
 	mkisofs -pad -b $(IMG) -R -o $(ISO) $(IMG)
 

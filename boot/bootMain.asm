@@ -1,7 +1,15 @@
+[org 0x7c00]
 ;
 ; PoulpyOS Main Boot Sector
 ;
-[org 0x7c00] ; Boot Sector initial offset 
+mov ax, 0
+mov es, ax
+mov ds, ax
+mov fs, ax
+mov gs, ax
+mov ss, ax
+
+; Boot Sector initial offset 
 [bits 16]
 KERNEL_OFFSET equ 0x1000
 mov [BOOT_DRIVE], dl 
@@ -20,6 +28,9 @@ mov bp, 0x9000 ; Set the stack position
 mov sp, bp
 
 ; Print welcome message
+mov bx, BOOT_WELCOME
+call print
+
 mov bx, BOOT_MSG_1
 call print
 
@@ -28,7 +39,7 @@ mov ebx,MSG_LOAD_KERNEL
 call print
 
 mov bx, KERNEL_OFFSET ; Read from disk and store at 0x1000
-mov dh, 32
+mov dh, 15
 mov dl, [BOOT_DRIVE]
 call disk_load
 
@@ -48,6 +59,9 @@ BEGIN_PM:
 
 ; Data
 BOOT_DRIVE db 0 
+
+BOOT_WELCOME:
+	db 13,10,13,10,'=== PoulpyOS - Welcome',13 ,10, 0
 
 BOOT_MSG_1:
     db 'Entering 16 bits mode...', 13, 10, 0
