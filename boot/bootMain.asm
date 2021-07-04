@@ -39,7 +39,7 @@ mov ebx,MSG_LOAD_KERNEL
 call print
 
 mov bx, KERNEL_OFFSET ; Read from disk and store at 0x1000
-mov dh, 15
+mov dh, 32
 mov dl, [BOOT_DRIVE]
 call disk_load
 

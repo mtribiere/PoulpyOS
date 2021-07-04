@@ -8,7 +8,7 @@
 __volatile__ unsigned char inputBuffer[MAX_INPUT_BUFFER];
 
 //The index of the next index to insert a key 
-__volatile__ char inputBufferIndex = 0;
+__volatile__ unsigned int inputBufferIndex = 0;
 
 //Current keyboard state 
 /***

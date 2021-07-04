@@ -38,6 +38,10 @@ void computeChar(char *cmd, char toInsert, uint8_t *runCommandFlag){
         
     }else{//Add the char to the string
 
+        //If the command as reached maxsize
+        if(strlen(cmd)+1 > MAX_COMMAND_SIZE)
+            return;
+            
         cmd[strlen(cmd)] = (uint8_t) toInsert;
     }
 
