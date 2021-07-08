@@ -31,7 +31,7 @@ user@debian:~$ make debug
 - [ ] Better timing for the clock based
 - [ ] Support exporting to ISO file
 - [ ] Make sure the PC doesn't blow up
-- [ ] Test on real hardware
+- [x] Test on real hardware
 
 
 ## Resources and useful links
