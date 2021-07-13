@@ -24,7 +24,7 @@ enum ColorPallette{
 void clearScreen();
 void clearLastLine();
 
-void pprint(char *buf);
+void pprint(const char *buf);
 void pprintChar(char c);
 
 void changeCurrentColor(enum ColorPallette c);

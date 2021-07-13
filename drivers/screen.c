@@ -125,7 +125,7 @@ void pprintChar(char c){
 
 }
 
-void pprint(char *buf){
+void pprint(const char *buf){
 
     //Init the print at the right position
     int offset = getCursorOffset();

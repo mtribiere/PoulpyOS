@@ -62,4 +62,4 @@ debug: $(BIN) kernel.elf
 
 clean:
 	rm -rf *.bin *.o *.bin *.img *.iso 
-	rm -rf kernel/*.o boot/*.bin drivers/*.o boot/*.o boot/*.bin
+	rm -rf kernel/*.o bin/*.o cpu/*.o boot/*.bin drivers/*.o boot/*.o libc/*.o boot/*.bin

@@ -79,7 +79,7 @@ void printTree(){
 
 }
 
-void printLyricText(char *text){
+void printLyricText(const char *text){
 
     //While lyrics are not over
     while(*text){
