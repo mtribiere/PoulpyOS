@@ -2,7 +2,8 @@
 <img align="middle" src="pic/logo_large.png" width="800"> <br>
 
 ## Description
-A toy OS for learning <br>
+A completely custom OS written from scratch, no Linux, no Windows, no nothing. <br>
+The bootloader is in assembly, and the Kernel written in C.<br> <br>
 <img align="middle" src="pic/pic1.png" width="400"> <img align="middle" src="pic/pic2.png" width="400">
 
 
